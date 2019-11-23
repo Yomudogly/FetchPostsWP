@@ -53,7 +53,7 @@ export let Todos = () => {
 			<ul>
 				{todos.map(t => (
 					<li
-						onClick={e =>
+						onClick={() =>
 							setTodos(
 								todos.map(todo => {
 									if (todo.id === t.id) {
@@ -63,7 +63,8 @@ export let Todos = () => {
 								})
 							)
 						}
-						key={t.id}>
+						key={t.id}
+						className={`${t.done ? "font-weight-bold" : ""}`}>
 						{t.text} ({t.done ? "done" : "not done"})
 					</li>
 				))}
