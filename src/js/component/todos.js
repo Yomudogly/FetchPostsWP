@@ -22,7 +22,7 @@ export let Todos = () => {
 								todos.concat({
 									text: e.target.value,
 									done: false,
-									index: Math.floor(Math.random() * 100000)
+									id: Math.floor(Math.random() * 100000)
 								})
 							);
 							setTemp("");
@@ -35,12 +35,12 @@ export let Todos = () => {
 						className="btn btn-outline-secondary"
 						type="button"
 						id="button-addon2"
-						onClick={e => {
+						onClick={() => {
 							setTodos(
 								todos.concat({
 									text: tempInputvalue,
 									done: false,
-									index: Math.floor(Math.random() * 100000)
+									id: Math.floor(Math.random() * 100000)
 								})
 							);
 							setTemp("");
@@ -52,7 +52,18 @@ export let Todos = () => {
 
 			<ul>
 				{todos.map(t => (
-					<li key={t.index}>
+					<li
+						onClick={e =>
+							setTodos(
+								todos.map(todo => {
+									if (todo.id === t.id) {
+										todo.done = !todo.done;
+									}
+									return todo;
+								})
+							)
+						}
+						key={t.id}>
 						{t.text} ({t.done ? "done" : "not done"})
 					</li>
 				))}
