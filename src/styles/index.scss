@@ -12,14 +12,21 @@
 
 */
 
+body {
+    background-color: rgb(154, 214, 241);
+}
+
 
 .done {
     font-size: 2rem;
+    font-weight: lighter;
     text-decoration: line-through;
     color: lightgray;
+    cursor: pointer;
 }
 
 .notDone {
     font-size: 2rem;
     text-decoration: none;
+    cursor: pointer;
 }
