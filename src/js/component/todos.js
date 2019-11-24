@@ -19,11 +19,13 @@ export let Todos = () => {
 						//listen to the key up and wait for the return key to be pressed (KeyCode === 13)
 						if (e.keyCode === 13) {
 							setTodos(
-								todos.concat({
-									text: e.target.value,
-									done: false,
-									id: Math.floor(Math.random() * 100000)
-								})
+								[
+									{
+										text: e.target.value,
+										done: false,
+										id: Math.floor(Math.random() * 100000)
+									}
+								].concat(todos)
 							);
 							setTemp("");
 						}
@@ -37,11 +39,13 @@ export let Todos = () => {
 						id="button-addon2"
 						onClick={() => {
 							setTodos(
-								todos.concat({
-									text: tempInputvalue,
-									done: false,
-									id: Math.floor(Math.random() * 100000)
-								})
+								[
+									{
+										text: tempInputvalue,
+										done: false,
+										id: Math.floor(Math.random() * 100000)
+									}
+								].concat(todos)
 							);
 							setTemp("");
 						}}>
@@ -55,17 +59,23 @@ export let Todos = () => {
 					<li
 						onClick={() =>
 							setTodos(
-								todos.map(todo => {
-									if (todo.id === t.id) {
-										todo.done = !todo.done;
-									}
-									return todo;
-								})
+								todos
+									.map(todo => {
+										if (todo.id === t.id) {
+											todo.done = !todo.done;
+										}
+
+										return todo;
+									})
+									.sort(
+										todo =>
+											todo.done > !todo.done ? 1 : -1
+									)
 							)
 						}
 						key={t.id}
-						className={`${t.done ? "font-weight-bold" : ""}`}>
-						{t.text} ({t.done ? "done" : "not done"})
+						className={`${t.done ? "done" : "notDone"}`}>
+						{t.text}
 					</li>
 				))}
 			</ul>

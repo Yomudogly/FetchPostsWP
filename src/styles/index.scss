@@ -11,3 +11,15 @@
     import 'relative/path/to/stylesheet.scss';
 
 */
+
+
+.done {
+    font-size: 2rem;
+    text-decoration: line-through;
+    color: lightgray;
+}
+
+.notDone {
+    font-size: 2rem;
+    text-decoration: none;
+}
