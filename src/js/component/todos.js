@@ -7,18 +7,16 @@ export let Todos = () => {
 
 	return (
 		<div>
-			<h1 className="text-center mt-5 text-light">
+			<h1 className="text-center mt-5">
 				{<i className="fa fa-check-square" />} To Do List...
 			</h1>
 			<div className="container d-flex justify-content-center">
-				<div
-					className="card bg-light border"
-					style={{ width: "30rem" }}>
+				<div className="card bg-light" style={{ width: "45rem" }}>
 					<div className="card-body">
-						<div className="input-group input-group-lg card-title">
+						<div className="input-group input-group-lg card-title mb-5">
 							<input
 								type="text"
-								className="form-control"
+								className="form-control border border-dark"
 								placeholder="Type your next todo..."
 								aria-label="Type your next todo..."
 								aria-describedby="button-addon2"
@@ -44,7 +42,7 @@ export let Todos = () => {
 							/>
 							<div className="input-group-append">
 								<button
-									className="btn btn-outline-secondary"
+									className="btn btn-outline-dark"
 									type="button"
 									id="button-addon2"
 									onClick={() => {
@@ -93,7 +91,7 @@ export let Todos = () => {
 										` ` +
 										`${t.done ? "done" : "notDone"}`
 									}>
-									{t.text}
+									{t.text}{" "}
 								</li>
 							))}
 						</ul>
