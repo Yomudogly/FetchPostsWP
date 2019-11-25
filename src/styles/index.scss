@@ -28,8 +28,20 @@ body {
     cursor: pointer;
 }
 
+.done:hover {
+    font-weight: normal;
+    text-decoration: none;
+    color: #212529;
+}
+
 .notDone {
     font-size: 2rem;
     text-decoration: none;
     cursor: pointer;
+}
+
+.notDone:hover {
+    font-weight: lighter;
+    text-decoration: line-through;
+    color: lightgray;
 }

@@ -8,7 +8,7 @@ export let Todos = () => {
 	return (
 		<div>
 			<h1 className="text-center mt-5">
-				{<i className="fa fa-check-square" />} To Do List...
+				{<i className="fa fa-check-square" />} To Do List
 			</h1>
 			<div className="container d-flex justify-content-center">
 				<div className="card bg-light">
@@ -96,7 +96,7 @@ export let Todos = () => {
 									</span>
 									<button
 										type="button"
-										className="btn btn-dark"
+										className="btn btn-outline-dark"
 										onClick={() =>
 											setTodos(
 												todos.filter(
