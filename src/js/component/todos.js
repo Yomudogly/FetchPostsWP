@@ -11,7 +11,7 @@ export let Todos = () => {
 				{<i className="fa fa-check-square" />} To Do List...
 			</h1>
 			<div className="container d-flex justify-content-center">
-				<div className="card bg-light" style={{ width: "45rem" }}>
+				<div className="card bg-light">
 					<div className="card-body">
 						<div className="input-group input-group-lg card-title mb-5">
 							<input
