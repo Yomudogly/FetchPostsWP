@@ -59,7 +59,7 @@ export let Todos = () => {
 										);
 										setTemp("");
 									}}>
-									Button
+									Add
 								</button>
 							</div>
 						</div>
@@ -67,31 +67,45 @@ export let Todos = () => {
 						<ul className="list-group list-group-flush">
 							{todos.map(t => (
 								<li
-									onClick={() =>
-										setTodos(
-											todos
-												.map(todo => {
-													if (todo.id === t.id) {
-														todo.done = !todo.done;
-													}
-
-													return todo;
-												})
-												.sort(
-													todo =>
-														todo.done > !todo.done
-															? 1
-															: -1
-												)
-										)
-									}
 									key={t.id}
-									className={
-										`list-group-item bg-light` +
-										` ` +
-										`${t.done ? "done" : "notDone"}`
-									}>
-									{t.text}{" "}
+									className="list-group-item bg-light d-flex justify-content-between align-items-center">
+									<span
+										className={`${
+											t.done ? "done" : "notDone"
+										}`}
+										onClick={() =>
+											setTodos(
+												todos
+													.map(todo => {
+														if (todo.id === t.id) {
+															todo.done = !todo.done;
+														}
+
+														return todo;
+													})
+													.sort(
+														todo =>
+															todo.done >
+															!todo.done
+																? 1
+																: -1
+													)
+											)
+										}>
+										{t.text}
+									</span>
+									<button
+										type="button"
+										className="btn btn-dark"
+										onClick={() =>
+											setTodos(
+												todos.filter(
+													todo => todo.id != t.id
+												)
+											)
+										}>
+										X
+									</button>
 								</li>
 							))}
 						</ul>
