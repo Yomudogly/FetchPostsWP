@@ -2,7 +2,11 @@ import React, { useState } from "react";
 
 //create your first component
 export let Todos = () => {
-	const [todos, setTodos] = useState([]);
+	const [todos, setTodos] = useState([
+		{ text: "Make a bed", done: false, id: 223345 },
+		{ text: "Read a book", done: false, id: 223343 },
+		{ text: "Go to school", done: true, id: 2233442 }
+	]);
 	const [tempInputvalue, setTemp] = useState("");
 
 	return (
