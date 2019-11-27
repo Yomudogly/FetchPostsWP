@@ -1,13 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 //create your first component
 export let Todos = () => {
-	const [todos, setTodos] = useState([
-		{ text: "Make a bed", done: false, id: 223345 },
-		{ text: "Read a book", done: false, id: 223343 },
-		{ text: "Go to school", done: true, id: 2233442 }
-	]);
+	const [todos, setTodos] = useState([]);
 	const [tempInputvalue, setTemp] = useState("");
+
+	useEffect(() => {
+		fetch("https://assets.breatheco.de/apis/fake/todos/user/yomudogly")
+			.then(resp => {
+				//console.log(resp.ok); // will be true if the response is successfull
+				//console.log(resp.status); // the status code = 200 or code = 400 etc.
+				//console.log(resp.text()); // will try return the exact result as string
+				return resp.json(); // (returns promise) will try to parse the result as json as return a promise that you can .then for results
+			})
+			.then(list => {
+				setTodos(
+					list.map(item => ({
+						text: item.label,
+						done: item.done,
+						id: Math.floor(Math.random() * 100000)
+					}))
+				);
+
+				console.log(list);
+			})
+			.catch(error => {
+				//error handling
+				console.log(error);
+			});
+	}, []);
 
 	return (
 		<div>
