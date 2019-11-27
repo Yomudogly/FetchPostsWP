@@ -60,7 +60,38 @@ export let Todos = () => {
 												}
 											].concat(todos)
 										);
+
 										setTemp("");
+
+										/* fetch(
+											"https://assets.breatheco.de/apis/fake/todos/user/yomudogly",
+											{
+												method: "PUT",
+												body: JSON.stringify(
+													todos.map(todo => ({
+														label: todo.text,
+														done: todo.done
+													}))
+												),
+												headers: {
+													"Content-Type":
+														"application/json"
+												}
+											}
+										)
+											.then(resp => {
+												//console.log(resp.ok); // will be true if the response is successfull
+												//console.log(resp.status); // the status code = 200 or code = 400 etc.
+												//console.log(resp.text()); // will try return the exact result as string
+												return resp.json(); // (returns promise) will try to parse the result as json as return a promise that you can .then for results
+											})
+											.then(list => {
+												console.log(list);
+											})
+											.catch(error => {
+												//error handling
+												console.log(error);
+											}); */
 									}
 								}}
 								value={tempInputvalue}
