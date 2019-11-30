@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 export let Todos = () => {
 	const [todos, setTodos] = useState([]);
 	const [tempInputvalue, setTemp] = useState("");
+	const [run, setRun] = useState(false);
 
 	useEffect(() => {
 		fetch("https://assets.breatheco.de/apis/fake/todos/user/yomudogly")
@@ -30,6 +31,45 @@ export let Todos = () => {
 			});
 	}, []);
 
+	useEffect(
+		() => {
+			if (run) {
+				fetch(
+					"https://assets.breatheco.de/apis/fake/todos/user/yomudogly",
+					{
+						method: "PUT",
+						body: JSON.stringify(
+							todos.map(todo => ({
+								label: todo.text,
+								done: todo.done
+							}))
+						),
+						headers: {
+							"Content-Type": "application/json"
+						}
+					}
+				)
+					.then(resp => {
+						//console.log(resp.ok); // will be true if the response is successfull
+						//console.log(resp.status); // the status code = 200 or code = 400 etc.
+						//console.log(resp.text()); // will try return the exact result as string
+						return resp.json(); // (returns promise) will try to parse the result as json as return a promise that you can .then for results
+					})
+					.then(list => {
+						console.log("FETCH", todos.length);
+						console.log(list);
+					})
+					.catch(error => {
+						//error handling
+						console.log(error);
+					});
+
+				setRun(false);
+			}
+		},
+		[run]
+	);
+
 	return (
 		<div>
 			<h1 className="text-center mt-5">
@@ -49,6 +89,8 @@ export let Todos = () => {
 								onKeyUp={e => {
 									//listen to the key up and wait for the return key to be pressed (KeyCode === 13)
 									if (e.keyCode === 13) {
+										console.log("BEFORE SET", todos.length);
+										setRun(true);
 										setTodos(
 											[
 												{
@@ -60,38 +102,9 @@ export let Todos = () => {
 												}
 											].concat(todos)
 										);
+										console.log("AFTER SET", todos.length);
 
 										setTemp("");
-
-										/* fetch(
-											"https://assets.breatheco.de/apis/fake/todos/user/yomudogly",
-											{
-												method: "PUT",
-												body: JSON.stringify(
-													todos.map(todo => ({
-														label: todo.text,
-														done: todo.done
-													}))
-												),
-												headers: {
-													"Content-Type":
-														"application/json"
-												}
-											}
-										)
-											.then(resp => {
-												//console.log(resp.ok); // will be true if the response is successfull
-												//console.log(resp.status); // the status code = 200 or code = 400 etc.
-												//console.log(resp.text()); // will try return the exact result as string
-												return resp.json(); // (returns promise) will try to parse the result as json as return a promise that you can .then for results
-											})
-											.then(list => {
-												console.log(list);
-											})
-											.catch(error => {
-												//error handling
-												console.log(error);
-											}); */
 									}
 								}}
 								value={tempInputvalue}
@@ -102,6 +115,7 @@ export let Todos = () => {
 									type="button"
 									id="button-addon2"
 									onClick={() => {
+										setRun(true);
 										setTodos(
 											[
 												{
@@ -129,7 +143,8 @@ export let Todos = () => {
 										className={`${
 											t.done ? "done" : "notDone"
 										}`}
-										onClick={() =>
+										onClick={() => {
+											setRun(true);
 											setTodos(
 												todos
 													.map(todo => {
@@ -146,20 +161,21 @@ export let Todos = () => {
 																? 1
 																: -1
 													)
-											)
-										}>
+											);
+										}}>
 										{t.text}
 									</span>
 									<button
 										type="button"
 										className="btn btn-outline-dark"
-										onClick={() =>
+										onClick={() => {
+											setRun(true);
 											setTodos(
 												todos.filter(
 													todo => todo.id != t.id
 												)
-											)
-										}>
+											);
+										}}>
 										X
 									</button>
 								</li>
