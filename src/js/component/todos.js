@@ -8,11 +8,14 @@ export let Todos = () => {
 
 	useEffect(() => {
 		fetch("https://assets.breatheco.de/apis/fake/todos/user/yomudogly")
-			.then(resp => {
+			.then(response => {
 				//console.log(resp.ok); // will be true if the response is successfull
 				//console.log(resp.status); // the status code = 200 or code = 400 etc.
 				//console.log(resp.text()); // will try return the exact result as string
-				return resp.json(); // (returns promise) will try to parse the result as json as return a promise that you can .then for results
+				if (!response.ok) {
+					throw Error(response.statusText);
+				}
+				return response.json(); // (returns promise) will try to parse the result as json as return a promise that you can .then for results
 			})
 			.then(list => {
 				setTodos(
@@ -27,7 +30,7 @@ export let Todos = () => {
 			})
 			.catch(error => {
 				//error handling
-				console.log(error);
+				console.log("Looks like there was a problem: \n", error);
 			});
 	}, []);
 
@@ -49,20 +52,17 @@ export let Todos = () => {
 						}
 					}
 				)
-					.then(resp => {
+					.then(response => {
 						//console.log(resp.ok); // will be true if the response is successfull
 						//console.log(resp.status); // the status code = 200 or code = 400 etc.
 						//console.log(resp.text()); // will try return the exact result as string
-						return resp.json(); // (returns promise) will try to parse the result as json as return a promise that you can .then for results
+						return response.json(); // (returns promise) will try to parse the result as json as return a promise that you can .then for results
 					})
-					.then(list => {
-						console.log("FETCH", todos.length);
-						console.log(list);
-					})
-					.catch(error => {
+					.then(list => console.log("Success:", JSON.stringify(list)))
+					.catch(error =>
 						//error handling
-						console.log(error);
-					});
+						console.log("Looks like there was a problem: \n", error)
+					);
 
 				setRun(false);
 			}
@@ -89,7 +89,6 @@ export let Todos = () => {
 								onKeyUp={e => {
 									//listen to the key up and wait for the return key to be pressed (KeyCode === 13)
 									if (e.keyCode === 13) {
-										console.log("BEFORE SET", todos.length);
 										setRun(true);
 										setTodos(
 											[
@@ -102,7 +101,6 @@ export let Todos = () => {
 												}
 											].concat(todos)
 										);
-										console.log("AFTER SET", todos.length);
 
 										setTemp("");
 									}
