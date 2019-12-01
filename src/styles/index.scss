@@ -28,11 +28,7 @@ body {
     cursor: pointer;
 }
 
-.done:hover {
-    font-weight: normal;
-    text-decoration: none;
-    color: #212529;
-}
+
 
 .notDone {
     font-size: 2rem;
@@ -40,8 +36,20 @@ body {
     cursor: pointer;
 }
 
+/* 
+
+Doesn't work properly on mobile devices
+
 .notDone:hover {
     font-weight: lighter;
     text-decoration: line-through;
     color: lightgray;
 }
+
+.done:hover {
+    font-weight: normal;
+    text-decoration: none;
+    color: #212529;
+}
+
+*/

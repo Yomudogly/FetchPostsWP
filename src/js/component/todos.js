@@ -87,8 +87,8 @@ export let Todos = () => {
 								aria-describedby="button-addon2"
 								onChange={e => setTemp(e.target.value)}
 								onKeyUp={e => {
-									//listen to the key up and wait for the return key to be pressed (KeyCode === 13)
-									if (e.keyCode === 13) {
+									//listen to the key up and wait for the return key to be pressed (Key === 'Enter')
+									if (e.key === "Enter") {
 										setRun(true);
 										setTodos(
 											[
@@ -112,7 +112,7 @@ export let Todos = () => {
 									className="btn btn-outline-dark"
 									type="button"
 									id="button-addon2"
-									onClick={() => {
+									onMouseUp={() => {
 										setRun(true);
 										setTodos(
 											[
@@ -141,7 +141,7 @@ export let Todos = () => {
 										className={`${
 											t.done ? "done" : "notDone"
 										}`}
-										onClick={() => {
+										onMouseUp={() => {
 											setRun(true);
 											setTodos(
 												todos
