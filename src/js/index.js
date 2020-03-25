@@ -9,7 +9,7 @@ import "bootstrap";
 import "../styles/index.scss";
 
 //import your own components
-import { Todos } from "./component/todos.js";
+import { Posts } from "./component/posts.js";
 
 //render your react application
-ReactDOM.render(<Todos />, document.querySelector("#app"));
+ReactDOM.render(<Posts />, document.querySelector("#app"));

@@ -17,20 +17,10 @@ body {
 }
 
 .card {
-    width: 40rem;
+    width: 60rem;
 }
 
-.done {
-    font-size: 2rem;
-    font-weight: lighter;
-    text-decoration: line-through;
-    color: lightgray;
-    cursor: pointer;
-}
-
-
-
-.notDone {
+.box {
     font-size: 2rem;
     text-decoration: none;
     cursor: pointer;
